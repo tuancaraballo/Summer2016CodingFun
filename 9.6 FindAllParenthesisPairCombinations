@@ -1,9 +1,62 @@
-//
-//  9.6 FindAllParenthesisPairCombinations
-//  
-//
-//  Created by Tuan Anh Tran Caraballo on 8/19/16.
-//
-//
+#include <iostream>
+#include <unordered_set>
+#include <string>
+#include <vector>
+using namespace std;
 
-#include <stdio.h>
+
+
+/*
+|    Question #9.6: Implement an algorithm to print all valid combinations of n-pairs
+|                   of parenthesis
+|         Approach: Solved it recursively using an unordered set
+|
+*/
+
+
+unordered_set<string> findAllCombinations(int index){
+
+    unordered_set<string> new_combinations; //--> set containing all newer combinations
+
+    if(index < 0) return new_combinations;
+
+    if(index == 0){
+        new_combinations.emplace("");
+        return new_combinations;
+    }
+    // --> recursive call to get all previous combinations
+    unordered_set<string> child_combinations = findAllCombinations(index-1);
+
+    // --> There will be duplicates, but the set data structure will check this for me
+    // so don't need to check if a new combination already exist in the set.
+    for(string element : child_combinations){
+        string embrace = "(" + element + ")";
+        string add_start = "()" + element;
+        string add_end = element + "()";
+
+        new_combinations.emplace(embrace);
+        new_combinations.emplace(add_start);
+        new_combinations.emplace(add_end);
+    }
+    return new_combinations;
+}
+
+
+void printSet(unordered_set<string> set){
+
+    int count = 0;
+    for(string elem : set){
+        cout<< elem <<", ";
+        count++;
+        if(count%5 == 0) cout<<endl;
+    }
+}
+
+int main() {
+
+
+    unordered_set<string> myset = findAllCombinations(3);
+    printSet(myset);
+
+    return 0;
+}

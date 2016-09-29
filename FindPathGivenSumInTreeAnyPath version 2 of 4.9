@@ -1,9 +1,182 @@
-//
-//  FindPathGivenSumInTreeAnyPath version 2 of 4.9
-//  
-//
-//  Created by Tuan Anh Tran Caraballo on 8/8/16.
-//
-//
+#include <iostream>
+#include <vector>
 
-#include <stdio.h>
+using namespace std;
+
+
+
+/*
+|  Question: Given a Tree and a number. Print all paths in the tree that
+|            add up to that number.(4.9) Varient 2: The path doesn't need to start @ the
+|            root or end at the leaf. Print all paths
+|
+|
+*/
+struct node{
+int data;
+node * left;
+node * right;
+
+node(int data, node * left, node * right){
+this->data = data;
+this->left =left;
+this->right = right;
+}
+
+};
+
+// Purpose: To print the vector that contains the path.
+
+void printVector(vector<int> & parents){
+cout<<"The path is: ";
+for(vector<int>::iterator it = parents.begin(); it!= parents.end(); ++it){
+cout<<*it<<" ";
+}
+cout<<endl;
+}
+
+// Purpose: It's just a helper function to check the Tree was created succesfully.
+void printTree(node * root){
+if(!root) return;
+
+printTree(root->left);
+cout<<root->data<<", ";
+printTree(root->right);
+}
+
+
+/*
+|   Purpose: Given a path (a vector of numbers) it finds all the possible paths
+|            (consecutive numbers)that add up to the target, if the sum is equal
+|            to the target, then it prints it.
+| Arguments: A vector containing straight line paths, and the target
+|
+*/
+
+void findAllPathsHelper(vector<int> & path, int target){
+
+vector<int> match;
+int len = path.size();
+
+for(int i =0; i<len-1; i++){
+match.clear();
+match.push_back(path[i]);
+int sum = path[i];
+if(sum == target){   // --> in case the very first number matches the target
+printVector(match);
+}
+
+for(int m = i+1; m<len; m++){
+sum += path[m];
+if(sum > target) break;  //--> don't even bother to keep going
+match.push_back(path[m]);
+if(sum == target){
+printVector(match);
+break;
+}
+}
+}
+}
+
+
+
+
+void findAllPaths(node * root, int target, vector<int> & path, int parent){
+if(!root) return;
+
+path.push_back(root->data);
+findAllPathsHelper(path,target);
+
+vector<int> temp;
+temp.push_back(root->data);
+
+if(parent == 0){
+findAllPaths(root->left,target,path,0);
+findAllPaths(root->right,target,temp,1);
+}else{
+findAllPaths(root->left,target,temp,0);
+findAllPaths(root->right,target,path,1);
+}
+}
+
+
+/*
+|   Purpose: To find the path.
+| Arguments: the root of the tree, the target sum, the sum of the previous parents and
+|            and a vector passed by reference that contains the previous parents.
+*/
+// void findPath(node * root, int target, vector<int> & parents, int left_or_right){
+//     if(!root) return;
+
+//     sum+= root->data;
+//     cout<<"Sum is: "<<sum<<endl;
+//     parents.push_back(root->data);
+//     if(sum == target){
+//         printVector(parents);
+
+//     }else{
+//         printSum(root->left,target,sum,parents);
+//         printSum(root->right,target,sum,parents);
+//     }
+
+//     parents.pop_back();
+
+// }
+
+
+int main() {
+
+// Creating a tree
+
+
+
+
+node * two = new node(2,NULL,NULL);
+node * three = new node(3,NULL,two);
+
+
+node * seven = new node(7,NULL,NULL);
+node * eight = new node(8,seven,NULL);
+node * ten_1 = new node(10,eight,three);
+
+
+node * five_3 = new node (5,NULL,NULL);
+node * five_2 = new node (5,NULL,five_3);
+node * five_1 = new node (5,ten_1,five_2);
+
+
+node * fourteen =  new node(14, NULL, NULL);
+node * fifteen =  new node(15, NULL,NULL);
+node * one = new node(1, fourteen,fifteen);
+
+node * four = new node(4, NULL,one);
+
+
+node * root = new node(10, five_1,four);
+
+
+printTree(root); //-->prints the tree in order-Traversal
+cout<<endl;
+//int target = 43;
+int sum = 0;
+vector<int> parents;
+
+vector<int> test = {4,5,3,1,2,3,4};
+cout<<"Test vector: "<<endl;
+//printVector(test);
+//findAllPaths(test, 9);
+
+int target = 15;
+vector <int> path;
+int parent = 0;
+findAllPaths(root,target, path, parent);
+
+
+
+
+// findPath(root,target,sum, parents);
+
+
+return 0;
+}
+
