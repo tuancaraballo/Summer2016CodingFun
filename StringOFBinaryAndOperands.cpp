@@ -9,7 +9,7 @@ using namespace std;
     Question: Given a string ex:  ((0&1)|0)&(1&1)) Find if the result is true or false
  
  --> I stumbled upon this question the other day on internet. Found it interesting, so decided
- to solve it. I honestly don't think this is the most optimal solution. I will try
+ to solve it. didn't add error checking for the string since it's not that interestingI honestly don't think this is the most optimal solution. I will try
  to solve it using stack.
  
  */
