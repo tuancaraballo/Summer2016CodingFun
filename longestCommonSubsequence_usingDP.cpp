@@ -23,7 +23,7 @@ using namespace std;
  |
  */
 
-void getLSC(string str1, string str2){
+int getLSC(string str1, string str2){
     
     int len1 = str1.size();
     int len2 = str2.size();
@@ -52,31 +52,9 @@ void getLSC(string str1, string str2){
         }
     }
     
+    return matrix[len1][len2];  // not len1-1 bc remember that row 0 and col 0 are zero, so the
+    // actual values start at row=1 and col=1, so it ends at len1 and len2
     
-    // --> From now on, the following code prints the subsequence.
-    
-    int overlap =  matrix[len1][len2];
-    
-    cout<<"Longest sequence length: "<<overlap<<endl;
-    string sequence; // --> another approach could have been making a char array and inserting
-    // at the specified index, that would have a better performance than inserting
-    // into a string, utilized this approach cuz it's easier.
-    while(row > 0 && col > 0){
-        
-        
-        if(str1[row-1] == str2[col-1]){
-            char c =  str1[row-1];
-            sequence.insert(0, &c);
-            row--;
-            col--;
-        }
-        else if (matrix[row-1][col] > matrix[row][col-1]){
-            row--;
-        }else{
-            col --;
-        }
-    }
-    cout<<"Sequence:"<<sequence<<endl;
 }
 
 
@@ -86,6 +64,6 @@ int main() {
     string str1 = "ABCDEF";
     string str2 = "MBCKLETMBF";
     // --> this function should return 4;
-    getLSC(str1,str2);
+    cout<<getLSC(str1,str2);
     return 0;
 }
