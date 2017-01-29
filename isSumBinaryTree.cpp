@@ -16,6 +16,12 @@ using namespace std;
  |  Approach#1: You have to run through all the elements in the tree once.
  |              Thus, the overall run-time performance of this is O(n)
  |
+ |
+ |
+ |
+ |
+ |
+ |
  */
 
 int negative_infinity = -INFINITY;
@@ -57,9 +63,8 @@ int isSumTree(node * root){
     return sum_left + sum_right + root->data;
 }
 
-asdffafasf
-asdfasf
-asdfasf
+
+
 
 int main() {
     
