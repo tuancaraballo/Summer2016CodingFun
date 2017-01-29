@@ -17,8 +17,8 @@ using namespace std;
  |              Thus, the overall run-time performance of this is O(n)
  |
  |
- |
- |
+ |              26
+ |          10      
  |
  |
  |
