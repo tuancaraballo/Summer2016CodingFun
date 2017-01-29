@@ -19,9 +19,9 @@ using namespace std;
  |
  |              26
  |          10      3
- |        4    6      3          
+ |        4    6      3
  |
- |
+ |  As you can see here on the left branch:  4+6 add to 10.
  */
 
 int negative_infinity = -INFINITY;
