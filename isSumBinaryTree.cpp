@@ -13,8 +13,8 @@ using namespace std;
  |              of tree such that a node is the total sum of the nodes
  |              below it: all its family: children and gran grand children
  |
- |  Approach#1: Print those nodes that don't have both children
- |              or don't have one of the children.
+ |  Approach#1: You have to run through all the elements in the tree once.
+ |              Thus, the overall run-time performance of this is O(n)
  |
  */
 
