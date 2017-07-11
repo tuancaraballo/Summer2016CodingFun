@@ -14,7 +14,9 @@ using namespace std;
  |
  */
 
-
+/*
+	Nice work!
+*/
 
 
 // Structure of a node
